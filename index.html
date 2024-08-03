@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Rentals</title>
+<!-- fontawesome 6.5.2 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- owl carousel min.css 2.3.4 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<!-- owl carousel default min.css 2.3.4 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- costom css -->
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<!-- topbar -->
+<div class="px-14 py-4 flex flex-col lg:flex-row justify-around lg:items-center" x-data="{ showSidebar: false }">
+    <!-- Logo and Toggle Button -->
+    <div class="flex items-center justify-between w-full lg:w-auto relative">
+        <a href="#" id="logo" class="flex items-center justify-between text-xl md:text-3xl font-extrabold text-primary">
+            <img src="assets/imgs/car-logo.svg" alt="Shiva Furnitures Logo" class="">
+        </a>
+        <button class="lg:hidden block text-gray-900 ml-4" @click="showSidebar = !showSidebar" aria-label="Toggle sidebar">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="border rounded-full text-sm hidden lg:block">
+        <select class="border-r p-3 rounded-l-full outline-none">
+            <option value="All">All</option>
+            <option value="New">New</option>
+            <option value="Used">Used</option>
+        </select>
+        <i class="fa-solid fa-magnifying-glass px-2"></i>
+        <input type="search" class="w-[300px] outline-none rounded-full pr-3" placeholder="Search">
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div :class="{ 'translate-x-0': showSidebar, '-translate-x-full': !showSidebar }" 
+         class="fixed inset-y-0 left-0 w-64 bg-black text-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 lg:hidden">
+        <div class="p-4">
+            <button @click="showSidebar = false" class="text-white">
+                <i class="fas fa-times fa-lg"></i>
+            </button>
+        </div>
+        <ul class="mt-5 tracking-wider space-y-4 text-sm font-medium uppercase">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-200 hover:text-black">NEW CARS</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-200 hover:text-black">BUY & SELL USED CARS</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-200 hover:text-black">NEWS, REVIEWS & VIDEOS</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-200 hover:text-black">CAR SERVICES</a></li>
+        </ul>
+    </div>
+
+    <div class="text-red-600 text-sm flex justify-center items-center font-semibold gap-2 max-lg:hidden">
+        <a href="#">
+            <i class="fa-solid fa-user w-8 h-8 bg-orange-500 text-white flex justify-center items-center rounded-full hover:bg-white hover:text-red-600 hover:border-2 duration-500"></i>
+        </a>
+        <a href="#">
+            Login / Register
+        </a>
+    </div>
+</div>
+
+<!-- navbar -->
+<nav class="navbar bg-slate-100 py-2 hidden lg:block">
+    <div class="px-14">
+        <div class="flex justify-between">
+            <ul class="nav-links capitalize flex gap-12 font-semibold text-slate-500 text-sm">
+                <li class="flex items-center justify-between">
+                    <a href="javascript:void(0)" class="hover:text-black duration-300">NEW CARS</a>
+                    <!-- <i class="fa-solid fa-caret-down text-sm"></i> -->
+                </li>
+                <li class="flex items-center justify-between">
+                    <a href="javascript:void(0)" class="hover:text-black duration-300">BUY & SELL USED CARS</a>
+                    <!-- <i class="fa-solid fa-caret-down text-sm"></i> -->
+                </li>
+                <li class="flex items-center justify-between">
+                    <a href="javascript:void(0)" class="hover:text-black duration-300">NEWS, REVIEWS & VIDEOS</a>
+                    <!-- <i class="fa-solid fa-caret-down text-sm"></i> -->
+                </li>
+                <li class="flex items-center justify-between">
+                    <a href="javascript:void(0)" class="hover:text-black duration-300">CAR SERVICES</a>
+                    <!-- <i class="fa-solid fa-caret-down text-sm"></i> -->
+                </li>
+            </ul>
+            <a href="#" class="text-sm font-semibold text-slate-500 hover:text-black">
+                <i class="fa-solid fa-location-dot"></i>
+                Select City
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+<!-- banner -->
+<div class="banner">
+    <div class="img">
+        <img src="assets/imgs/banner.webp" alt="">
+    </div>
+</div>
+<!-- tab menu -->
+<div class="tab-menu px-10 relative">
+    <div class="border rounded-lg px-4 py-4">
+        <h2 class="text-2xl font-semibold">Top Most Searched Cars</h2>
+        <div class="tab-menu-links capitalize flex text-sm my-4">
+            <a href="javascript:void(0)" data-menu="#suv" class="text-black px-6 py-3 active hover:text-black duration-300">
+                SUV
+            </a>
+            <a href="javascript:void(0)" data-menu="#hatchback" class="text-black px-6 py-3 hover:text-black duration-300">
+                hatchback
+            </a>
+            <a href="javascript:void(0)" data-menu="#sedan" class="text-black px-6 py-3 hover:text-black duration-300">
+                sedan
+            </a>
+            <a href="javascript:void(0)" data-menu="#muv" class="text-black px-6 py-3 hover:text-black duration-300">
+                MUV
+            </a>
+            <a href="javascript:void(0)" data-menu="#luxury" class="text-black px-6 py-3 hover:text-black duration-300">
+                luxury
+            </a>
+        </div>
+        
+        <div class="menu-tab">
+            <div class="options active" id="suv">
+                <!-- suv btns -->
+                <div class="btns">
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="suv-prev">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="suv-next">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="owl-carousel suv-carousel active">
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="options" id="hatchback">
+                <!-- hatchback btns -->
+                <div class="btns">
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="hatchback-prev">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="hatchback-next">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="owl-carousel hatchback-carousel">
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <div class="options" id="sedan">
+                <!-- sedan btns -->
+                <div class="btns">
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="sedan-prev">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="sedan-next">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="owl-carousel sedan-carousel">
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <div class="options" id="muv">
+                <!-- muv btns -->
+                <div class="btns">
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="muv-prev">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="muv-next">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="owl-carousel muv-carousel">
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <div class="options" id="luxury">
+                <!-- luxury btns -->
+                <div class="btns">
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="luxury-prev">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="luxury-next">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="owl-carousel luxury-carousel">
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>    
+
+    </div>
+</div>
+
+<!-- recomend-car-carousel -->
+<section class="wood cards px-10 py-6 relative rounded-lg">
+    <div class="border rounded-lg px-4">
+        <h1 class="capitalize text-2xl font-semibold tracking-wide mt-5 mb-10">
+            recommended used cars for you
+        </h1>
+        <div class="btns">
+            <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="recommed-prev">
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="recommed-next">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+        <div class="owl-carousel recommed-carousel">
+            <a href="#" class="border inline-block">
+                <div class="wood-img h-[200px] w-full">
+                    <img src="assets/imgs/suv1.jpg" class="h-full object-cover w-full" alt="">
+                </div>
+                <div class="wood-content space-y-4 p-4">
+                    <h2 class="text-xl font-semibold">
+                        Quality Wooden Product
+                    </h2>
+                    <div class="content text-xs">
+                        Lorem, ipsum dolor <br> sit amet consectetur adipisicing elit.
+                    </div>
+                    <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                        View Seller Details
+                    </button>
+                </div>
+            </a>
+            <a href="#" class="border inline-block">
+                <div class="wood-img h-[200px] w-full">
+                    <img src="assets/imgs/suv2.jpg" class="h-full object-cover w-full" alt="">
+                </div>
+                <div class="wood-content space-y-4 p-4">
+                    <h2 class="text-xl font-semibold">
+                        Quality Wooden Product
+                    </h2>
+                    <div class="content text-xs">
+                        Lorem, ipsum dolor <br> sit amet consectetur adipisicing elit.
+                    </div>
+                    <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                        View Seller Details
+                    </button>
+                </div>
+            </a>
+            <a href="#" class="border inline-block">
+                <div class="wood-img h-[200px] w-full">
+                    <img src="assets/imgs/suv3.jpg" class="h-full object-cover w-full" alt="">
+                </div>
+                <div class="wood-content space-y-4 p-4">
+                    <h2 class="text-xl font-semibold">
+                        Quality Wooden Product
+                    </h2>
+                    <div class="content text-xs">
+                        Lorem, ipsum dolor <br> sit amet consectetur adipisicing elit.
+                    </div>
+                    <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                        View Seller Details
+                    </button>
+                </div>
+            </a>
+            <a href="#" class="border inline-block">
+                <div class="wood-img h-[200px] w-full">
+                    <img src="assets/imgs/suv4.jpg" class="h-full object-cover w-full" alt="">
+                </div>
+                <div class="wood-content space-y-4 p-4">
+                    <h2 class="text-xl font-semibold">
+                        Quality Wooden Product
+                    </h2>
+                    <div class="content text-xs">
+                        Lorem, ipsum dolor <br> sit amet consectetur adipisicing elit.
+                    </div>
+                    <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                        View Seller Details
+                    </button>
+                </div>
+            </a>
+            <a href="#" class="border inline-block">
+                <div class="wood-img h-[200px] w-full">
+                    <img src="assets/imgs/suv5.jpg" class="h-full object-cover w-full" alt="">
+                </div>
+                <div class="wood-content space-y-4 p-4">
+                    <h2 class="text-xl font-semibold">
+                        Quality Wooden Product
+                    </h2>
+                    <div class="content text-xs">
+                        Lorem, ipsum dolor <br> sit amet consectetur adipisicing elit.
+                    </div>
+                    <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                        View Seller Details
+                    </button>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- Latest-car-carousel -->
+<section class="latest-car cards px-10 py-6 relative rounded-lg">
+    <div class="border rounded-lg px-4">
+        <h1 class="capitalize text-2xl font-semibold tracking-wide mt-5 mb-10">
+            latest car
+        </h1>
+        <div class="btns">
+            <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute left-5 z-10 top-[45%]" id="latest-car-prev">
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <button class="border px-4 py-2 shadow-lg rounded-full bg-slate-200 hover:bg-white duration-500 absolute right-5 z-10 top-[45%]" id="latest-car-next">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+        <div class="owl-carousel latest-car-carousel">
+           <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/mahidra thar.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Thar <br>
+                                Rs11.35 - 17.60 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/bloro.webp" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Bolero <br>
+                                Rs9.79 - 10.91 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/scropio.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Mahindra Scorpio<br>
+                                Rs13.62 - 17.42 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+                    <a href="#" class="border inline-block">
+                        <div class="wood-img h-[200px] w-full">
+                            <img src="assets/imgs/tata punch.jpg" class="h-full object-cover w-full" alt="">
+                        </div>
+                        <div class="wood-content space-y-4 p-4">
+                            <h2 class="font-semibold">
+                                Tata Punch <br>
+                                Rs6.13 - 10.20 Lakh*
+                            </h2>
+                            <button class="border border-orange-600 text-orange-600 inline-block w-full py-1" >
+                                View Seller Details
+                            </button>
+                        </div>
+                    </a>
+
+        </div>
+
+    </div>
+
+    
+</section>
+
+<!-- brand-car-logo -->
+<section class="brand-car cards px-10  relative rounded-lg">
+    <div class="border rounded-lg px-4 py-4">
+        <h1 class="capitalize text-2xl font-semibold tracking-wide mt-5 mb-10">
+            Popular Brands
+        </h1>
+        
+        <div class="flex justify-between gap-4">
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo1.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo2.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo3.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo4.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo5.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+            <a href="#" class="border hover:shadow-md duration-500">
+                <div class="wood-img h-16 lg:h-full lg:p-6 w-full">
+                    <img src="assets/imgs/brand-logo6.webp" class="h-full object-contain w-full" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- footer -->
+<footer class="px-14 footer bg-slate-100 mt-10 py-6">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-2 lg:grid-cols-4">
+            <div class="support-links capitalize">
+                <h6 class="text-lg text-black">support</h6>
+                <ul class="mt-3 leading-8 text-gray-500">
+                    <li class="duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">help center</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">Packages </a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">cancellation options</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">safety system</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="company-links capitalize">
+                <h6 class="text-lg text-black">company</h6>
+                <ul class="mt-3 leading-6 text-gray-500">
+                    <li class="duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">about us</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">community blog</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">careers</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">privacy policy</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">terms of service</a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="contact-links capitalize">
+                <h6 class="text-lg text-black">contact</h6>
+                <ul class="mt-3 leading-6 text-gray-500">
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">partnerships</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">FAQ</a>
+                    </li>
+                    <li class=" duration-300 ease-linear hover:translate-x-3 hover:text-cyan-600">
+                        <a href="javascript:void(0)">get in touch</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact-info capitalize">
+                <h6 class="text-lg text-black">social</h6>
+                <ul class="mt-3 leading-7 text-gray-400 text-sm flex gap-6">
+                    <li>
+                        <i class="fa-brands fa-instagram flex justify-center items-center rounded-full cursor-pointer w-10 h-10 bg-pink-700 text-white hover:bg-pink-600"></i>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-facebook-f flex justify-center items-center rounded-full cursor-pointer w-10 h-10 bg-blue-700 text-white hover:bg-blue-600"></i>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-youtube flex justify-center items-center rounded-full cursor-pointer w-10 h-10 bg-red-600 text-white hover:bg-red-500"></i>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-x-twitter flex justify-center items-center rounded-full cursor-pointer w-10 h-10 bg-black text-white hover:bg-slate-700"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- footer bottom -->
+<div class="px-14 footer-bottom bg-slate-100 capitalize">
+    <div class="container mx-auto flex justify-between text-gray-500 border-t-2 py-3 max-lg:block">
+        <span>
+            copyright &copy; to shiftingbazar all right reserved
+        </span>
+        <span>
+            made with <i class="fas fa-heart text-red-500"></i> <a href="https://spreadmycareer.in/">SpreadMyBuisness</a>
+        </span>
+    </div>
+</div>
+
+</body>
+<!-- All JS Links -->
+<!-- AlpineJs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.js" defer></script>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Owl Carousel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- Custom Js -->
+<script src="assets/js/js.js"></script>
+<!-- Js Link Ends Here -->
+
+</html>
